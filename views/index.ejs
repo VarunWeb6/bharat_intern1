@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full h-full bg-zinc-900 text-white px-4 py-2">
+    <form action="/create-post" method="post">
+    <h1 class="text-3xl mb-4">Create Post</h1>
+    <input class="p-3 bg-transparent border-2 rounded-md w-72" type="text" placeholder="username" name="username"><br><br>
+    <input class="p-3 bg-transparent border-2  rounded-md w-72" type="text" placeholder="title" name="title"><br><br>
+    <textarea class=" p-3 bg-transparent border-2 ouline-none rounded-md w-80" placeholder="content" name="content"></textarea><br><br>
+    <input class="bg-blue-700 px-3 py-2 rounded-md mb-5" type="submit" value="Create Post">
+    </form>
+    <h1 class="text-3xl mb-4"><%= title %></h1>
+    <div class="posts text-2xl mt-4">
+        <ul>
+            <% posts.reverse().forEach((post) => { %>
+                <hr class="mb-4">
+                <p class="text-blue-500">@<%= post.username %></p>
+                <h2 class="text-3xl">Title : <%= post.title %></h2>
+                <p class="text-zinc-700"><%= post.content %></p>
+                <form action="/delete-post" method="post">
+                    <input type="hidden" name="id" value="<%= post._id %>">
+                    <button class="bg-red-500 rounded-md px-2 py-1 mt-2" type="submit">Delete</button>
+                </form>
+                <hr class="mt-5">
+            <% }); %>
+            </ul>
+    </div>
+    </div>
+    
+</body>
+</html>
